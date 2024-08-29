@@ -10,7 +10,7 @@ export class UserGetOneById {
     async run(id: string): Promise<User> {
         const user = await this.userRepository.getOneById(new UserId(id));
 
-        if (!user) throw new UserNotFoundError('User not found');
+        if (!user) throw new UserNotFoundError('User not found!');
         
         return user;
     }

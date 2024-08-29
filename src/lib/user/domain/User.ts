@@ -20,4 +20,13 @@ export class User {
     public nameAndEmail() {
         return `${this.name} <${this.email}>`;
     }
+
+    public mapToPrimitives() {
+        return {
+            id: this.id.value,
+            name: this.name.value,
+            email: this.email.value,
+            created_at: this.createdAt.value
+        }
+    }
 }
