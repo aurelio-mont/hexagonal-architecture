@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ServiceContainer } from "../../shared/infrastructure/ServiceContainer";
+import { ServiceContainer } from "../../../../shared/infrastructure/ServiceContainer";
 import { UserNotFoundError } from "../domain/UserNotFoundError";
 import { v4 as uuidv4 } from 'uuid';
 
