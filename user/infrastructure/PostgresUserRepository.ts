@@ -36,14 +36,7 @@ export class PostgresUserRepository implements UserRepository {
 
         const results = await this.client.query<PosgresUser>(query);
 
-        return results.rows.map(
-            (row) =>  new User(
-                new UserId(row.id),
-                new UserName(row.name),
-                new UserEmail(row.email),
-                new UserCreatedAt(row.created_at),
-            )
-        );
+        return results.rows.map((row) => this.mapRowToUser(row));
     }
 
     async getOneById(id: UserId): Promise<User | null> {
@@ -59,12 +52,7 @@ export class PostgresUserRepository implements UserRepository {
 
         const row = result.rows[0];
 
-        return new User(
-            new UserId(row.id),
-            new UserName(row.name),
-            new UserEmail(row.email),
-            new UserCreatedAt(row.created_at),
-        );
+        return this.mapRowToUser(row);
     }
 
     async edit(user: User): Promise<void> {
@@ -83,5 +71,14 @@ export class PostgresUserRepository implements UserRepository {
         };
 
         await this.client.query(query);
+    }
+
+    private mapRowToUser(row: PosgresUser): User {
+        return new User(
+            new UserId(row.id),
+            new UserName(row.name),
+            new UserEmail(row.email),
+            new UserCreatedAt(row.created_at),
+        );
     }
 }
